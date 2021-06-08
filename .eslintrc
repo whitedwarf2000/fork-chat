@@ -1,0 +1,33 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "jest": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": ["eslint:recommended", "plugin:prettier/recommended", "plugin:react/recommended"],
+  "plugins": ["import", "prettier", "react-hooks"],
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "rules": {
+    "arrow-parens": ["error", "as-needed"],
+    "no-console": "error",
+    "no-eval": "error",
+    "max-len": [
+      "error",
+      {
+        "code": 100,
+        "ignoreUrls": true,
+        "ignoreComments": true
+      }
+    ],
+    "semi": "error",
+    "no-unused-vars": ["warn", { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }],
+    "quotes": ["error", "single", { "allowTemplateLiterals": true }],
+    "import/first": "error",
+    "react-hooks/rules-of-hooks": "error"
+  }
+}
