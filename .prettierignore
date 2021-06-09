@@ -1,11 +1,5 @@
-# Don't check auto-generated stuff into git
-dist
-release
-
 node_modules
-.cache
-coverage/
-
-# Cruft
-.DS_Store
-npm-debug.log
+build
+dist
+coverage
+.eslintrc
