@@ -1,20 +1,20 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import useChat from './useChat';
 
 const ChatRoom = () => {
   const { id } = useParams();
-  const textAreaRef = useRef(null);
 
   const { messages, sendMessage } = useChat(id);
   const [currentMess, setCurrentMess] = useState('');
 
+  const handleChangeMessage = event => {
+    setCurrentMess(event.target.value);
+  };
+
   const handleSendMessage = () => {
-    if (!textAreaRef.current) {
-      return;
-    }
-    sendMessage(textAreaRef.current.value);
+    sendMessage(currentMess);
     setCurrentMess('');
   };
 
@@ -35,8 +35,8 @@ const ChatRoom = () => {
         </ol>
       </div>
       <textarea
-        ref={textAreaRef}
-        defaultValue={currentMess}
+        value={currentMess}
+        onChange={handleChangeMessage}
         placeholder="Write message..."
         className="new-message-input-field"
       />
