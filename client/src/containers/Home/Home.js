@@ -1,30 +1,31 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 
 import api from 'api';
 
-import Conversation from 'containers/Conversation';
+import { CURRENT_USER_ID } from 'constants.js';
 
-const CURRENT_USER_ID = '60c22c2b4be3e81e6c84a625';
+import Conversation from 'containers/Conversation';
+import Direct from 'containers/Direct';
 
 const Home = () => {
-  const history = useHistory();
-  const inputRef = useRef(null);
-
   const [userInfo, setUserInfo] = useState({});
+  const [currentChat, setCurrentChat] = useState(null);
 
-  const joinChatRoom = () => {
-    if (!inputRef?.current || inputRef.current.value.length === 0) {
-      return;
+  const handleStartConversation = convers => {
+    if (convers !== currentChat) {
+      setCurrentChat(convers);
     }
-    history.push(`/room/${inputRef.current.value}`);
   };
 
   const fetchUser = async () => {
-    const { data: user } = await api.get(`users/get/${CURRENT_USER_ID}`);
+    try {
+      const { data: user } = await api.get(`users/get/${CURRENT_USER_ID}`);
 
-    if (user) {
-      setUserInfo(user);
+      if (user) {
+        setUserInfo(user);
+      }
+    } catch (error) {
+      return error;
     }
   };
 
@@ -35,11 +36,10 @@ const Home = () => {
   return (
     <div>
       <h1>Hi {userInfo?.username}</h1>
-      <div className="conversation-wrapper">{userInfo?._id ? <Conversation /> : null}</div>
-      <input ref={inputRef} defaultValue="" type="text" placeholder="Input your room name" />
-      <button type="button" onClick={joinChatRoom}>
-        Join chat room
-      </button>
+      <div className="conversation-wrapper">
+        {userInfo?._id ? <Conversation handleStartConversation={handleStartConversation} /> : null}
+      </div>
+      {currentChat ? <Direct currentChat={currentChat} /> : <h3>No current chat</h3>}
     </div>
   );
 };
