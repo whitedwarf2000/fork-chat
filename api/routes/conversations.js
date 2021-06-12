@@ -1,31 +1,28 @@
 const router = require("express").Router();
 const Conversation = require("../models/Conversation");
 
-//new conv
-
+// new conv
 router.post("/", async (req, res) => {
   try {
-    res.status(200).json("");
+    const newConversation = new Conversation({
+      members: [req.body.senderId, req.body.receiverId],
+    });
+    const savedConversation = await newConversation.save();
+    res.status(200).json(savedConversation);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-//get conv of a user
-
+// get conv of user
 router.get("/:userId", async (req, res) => {
   try {
-    res.status(200).json("");
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-// get conv includes two userId
-
-router.get("/find/:firstUserId/:secondUserId", async (req, res) => {
-  try {
-    res.status(200).json("")
+    // find conversation will return array of conversation
+    // instead of once when you use findOne
+    const conversation = await Conversation.find({
+      members: { $in: [req.params.userId] }
+    });
+    res.status(200).json(conversation);
   } catch (err) {
     res.status(500).json(err);
   }
