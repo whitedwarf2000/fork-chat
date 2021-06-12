@@ -7,11 +7,15 @@ const MemberConversation = ({ conversation, currentUserId }) => {
   const [friend, setFriend] = useState({});
 
   const fetchUserInfo = async () => {
-    const friendId = conversation.members.find(member => member !== currentUserId);
-    const { data: friendInfo } = await api.get(`users/get/${friendId}`);
+    try {
+      const friendId = conversation.members.find(member => member !== currentUserId);
+      const { data: friendInfo } = await api.get(`users/get/${friendId}`);
 
-    if (friendInfo) {
-      setFriend(friendInfo);
+      if (friendInfo) {
+        setFriend(friendInfo);
+      }
+    } catch (error) {
+      return error;
     }
   };
 
