@@ -13,7 +13,7 @@ module.exports = merge(common, {
   output: {
     path: paths.build,
     publicPath: '/',
-    filename: 'js/[name].[contenthash].bundle.js',
+    filename: 'js/[name].[contenthash].js',
   },
   plugins: [
     new Dotenv({
