@@ -3,8 +3,12 @@ import PropTypes from 'prop-types';
 
 import api from 'api';
 
+import useChat from 'hooks/useChat';
+
 const MessageBox = ({ currentChat, userId }) => {
+  const { sendMessage } = useChat(currentChat._id);
   const [currentMess, setCurrentMess] = useState('');
+
   const handleChangeMessage = event => {
     setCurrentMess(event.target.value);
   };
@@ -15,6 +19,9 @@ const MessageBox = ({ currentChat, userId }) => {
       sender: userId,
       text: currentMess,
     };
+
+    const receiverId = currentChat.members.find(member => member !== userId);
+    sendMessage(currentMess, userId, receiverId);
 
     try {
       await api.post('messages', {
