@@ -4,33 +4,31 @@ import { io } from 'socket.io-client';
 const NEW_CHAT_MESSAGE_EVENT = 'newChatMessageEvent';
 const SOCKET_SERVER_URL = 'http://localhost:4000';
 
-const useChat = roomId => {
+const useChat = conversationId => {
   const [messages, setMessages] = useState([]);
   const socketRef = useRef(null);
 
   useEffect(() => {
     socketRef.current = io(SOCKET_SERVER_URL, {
-      query: { roomId },
+      query: { conversationId },
     });
 
     socketRef.current.on(NEW_CHAT_MESSAGE_EVENT, message => {
       // message is a object defined at line 31
-      const incomingMessage = {
-        ...message,
-        ownedByCurrentUser: message.senderId === socketRef.current.id,
-      };
-      setMessages(prevMessage => [...prevMessage, incomingMessage]);
+      setMessages(prevMessage => [...prevMessage, { ...message }]);
     });
 
     return () => {
       socketRef.current.disconnect();
     };
-  }, [roomId]);
+  }, [conversationId]);
 
-  const sendMessage = messageBody => {
+  const sendMessage = (newMessage, userId, receiverId) => {
     socketRef.current.emit(NEW_CHAT_MESSAGE_EVENT, {
-      body: messageBody,
-      senderId: socketRef.current.id,
+      text: newMessage,
+      sender: userId,
+      receiverId,
+      conversationId,
     });
   };
 
