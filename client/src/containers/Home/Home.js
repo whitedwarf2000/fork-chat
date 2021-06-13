@@ -39,7 +39,11 @@ const Home = () => {
       <div className="conversation-wrapper">
         {userInfo?._id ? <Conversation handleStartConversation={handleStartConversation} /> : null}
       </div>
-      {currentChat ? <Direct currentChat={currentChat} /> : <h3>No current chat</h3>}
+      {currentChat ? (
+        <Direct userId={userInfo?._id} currentChat={currentChat} />
+      ) : (
+        <h3>No current chat</h3>
+      )}
     </div>
   );
 };

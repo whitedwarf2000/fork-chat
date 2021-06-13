@@ -1,40 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import api from 'api';
 
-const Direct = ({ currentChat }) => {
-  const [mess, setMess] = useState([]);
+import MessageBox from './MessageBox';
+import AllMessage from './AllMessages';
 
-  const fetchMessageOfConversation = async conversationId => {
-    try {
-      const { data: messages } = await api.get(`/messages/${conversationId}`);
-      if (messages) {
-        setMess(messages);
-      }
-    } catch (error) {
-      return error;
-    }
-  };
-
-  useEffect(() => {
-    if (currentChat?._id) {
-      fetchMessageOfConversation(currentChat._id);
-    }
-  }, [currentChat]);
-
+const Direct = ({ currentChat, userId }) => {
   return (
-    <div className="message-wrapper">
-      {mess.length > 0 ? (
-        mess.map(m => <p key={m._id}>{m.text}</p>)
-      ) : (
-        <h3>Start new conversation</h3>
-      )}
+    <div>
+      <AllMessage userId={userId} currentChat={currentChat} />
+      <MessageBox userId={userId} currentChat={currentChat} />
     </div>
   );
 };
 
 Direct.propTypes = {
   currentChat: PropTypes.object,
+  userId: PropTypes.string,
 };
 
 export default Direct;
