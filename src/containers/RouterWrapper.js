@@ -4,7 +4,7 @@ import { Route, Redirect } from 'react-router-dom';
 
 import useAuth from 'hooks/useAuth';
 
-import MainLayout from 'containers/MainLayout';
+import MainLayout from 'containers/Layout/MainLayout';
 
 const RouteWrapper = ({ component: Component, layout, isPrivate, ...rest }) => {
   const { isLoggedIn } = useAuth();

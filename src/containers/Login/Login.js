@@ -1,7 +1,20 @@
 import React from 'react';
 
+import LoginForm from './LoginForm';
+
+import { LoginWrapper, Logo } from './loginStyles';
+
+import logo from '../../assets/images/logo.png';
+
 const Login = () => {
-  return <h1>Login</h1>;
+  return (
+    <LoginWrapper>
+      <Logo>
+        <img alt="main-logo" src={logo} />
+      </Logo>
+      <LoginForm />
+    </LoginWrapper>
+  );
 };
 
 export default Login;

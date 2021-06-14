@@ -1,0 +1,64 @@
+@import './vars.scss';
+
+html {
+  font-size: 14px;
+  box-sizing: border-box;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-variant-ligatures: common-ligatures;
+}
+
+body.dark-mode {
+  --text-color: #{$dark--main};
+
+  --mvbg-color: #{$light-main};
+
+  --color--200: #{$light--200};
+  --color--100: #{$light--100};
+  --search-bar-background: #{$light--200};
+}
+
+body.light-mode {
+  --text-color: #{$dark--300};
+  --mv-bg-color: #{$light-main};
+  --white-rgb: #{$white-rgb};
+
+  --color-700: #{$color-700};
+  --color-error: #{$color-error};
+  --color-100: #{$light--100};
+  --color-200: #{$light--200};
+  --color-300: #{$dark--100};
+
+  --border-color: #{$border-color};
+  --scrollbar: #{$scrollbar};
+  --scrollbar-track: #{$scrollbar-track};
+  --scrollbar-thumb: #{$scrollbar-thumb};
+
+  display: block;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+
+  overflow: hidden;
+  scrollbar-color: var(--scrollbar-thumb) transparent;
+  scrollbar-width: thin;
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    background-color: var(--scrollbar);
+  }
+
+  ::-webkit-scrollbar-track {
+    border-radius: var(--border-radius-medium);
+    background: var(--scrollbar-track);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: var(--border-radius-medium);
+    background-color: var(--scrollbar-thumb);
+  }
+}
+
+textarea:focus, input:focus{
+  outline: none;
+}
