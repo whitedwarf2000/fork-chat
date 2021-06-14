@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+import { Button } from 'fork-ui/core';
 import api from 'api';
 
 import { CURRENT_USER_ID } from 'constants.js';
@@ -44,6 +44,7 @@ const Home = () => {
       ) : (
         <h3>No current chat</h3>
       )}
+      <Button color="primary">Click me</Button>
     </div>
   );
 };
