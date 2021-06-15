@@ -8,7 +8,7 @@ export const AuthWrapper = styled.div`
   overflow-y: scroll;
   display: flex;
   align-items: center;
-  padding: 3em 12em;
+  padding: 0em 12em;
 
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -25,3 +25,5 @@ export const RightContent = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
 `;
+
+export const LeftContent = styled.div``;

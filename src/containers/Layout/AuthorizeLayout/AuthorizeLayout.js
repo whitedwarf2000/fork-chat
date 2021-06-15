@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { AuthWrapper, RightContent } from './authorizeLayoutStyles';
+import { AuthWrapper, RightContent, LeftContent } from './authorizeLayoutStyles';
 
 const AuthorizeLayout = ({ children }) => {
   return (
     <AuthWrapper>
-      <div className="left">{children}</div>
+      <LeftContent>{children}</LeftContent>
       <RightContent />
     </AuthWrapper>
   );

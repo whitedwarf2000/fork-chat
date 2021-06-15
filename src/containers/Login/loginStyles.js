@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Logo = styled.div`
-  width: 185px;
+  width: 300px;
 `;
 
 export const LoginWrapper = styled.div`
@@ -26,6 +26,7 @@ export const ForgotPassword = styled.div`
   font-weight: bold;
   font-style: italic;
   color: var(--color-300);
+  cursor: pointer;
 `;
 
 export const Signup = styled.div`
