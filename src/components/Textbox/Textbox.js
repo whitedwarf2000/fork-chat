@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
@@ -39,13 +39,11 @@ const InputError = styled(InputLabel)`
 `;
 
 const Textbox = React.forwardRef(({ errorMessage, size, label, ...rest }, ref) => {
-  const message = useMemo(() => errorMessage?.message, [errorMessage]);
-
   return (
     <InputWrapper>
       <InputLabel>{label}</InputLabel>
       <Input ref={ref} size={size} {...rest} />
-      <InputError>{message}</InputError>
+      <InputError>{errorMessage}</InputError>
     </InputWrapper>
   );
 });
@@ -53,7 +51,7 @@ const Textbox = React.forwardRef(({ errorMessage, size, label, ...rest }, ref) =
 Textbox.displayName = 'Textbox';
 Textbox.propTypes = {
   label: PropTypes.string,
-  errorMessage: PropTypes.object,
+  errorMessage: PropTypes.string,
   size: PropTypes.oneOf(['large', 'medium', 'small']),
 };
 
