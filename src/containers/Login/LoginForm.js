@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { Button } from 'fork-ui/core';
+import { Button } from '@fork-ui/core';
 import Textbox from 'components/Textbox';
 
 import api from 'api';
