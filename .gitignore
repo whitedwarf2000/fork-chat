@@ -3,4 +3,4 @@ dist
 .DS_Store
 # jetbrains
 .idea
-src/fork-ui
+fork-ui
