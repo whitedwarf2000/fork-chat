@@ -78,7 +78,7 @@ module.exports = {
     modules: ['node_modules', 'src'],
     extensions: ['.js', '.json'],
     alias: {
-      '@fork-ui': paths.src + '/fork-ui',
+      '@fork-ui': paths.forkUI,
     },
   },
 };
