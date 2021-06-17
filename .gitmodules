@@ -1,3 +1,3 @@
 [submodule "fork-ui"]
 	path = fork-ui
-	url = ../fork-ui.git
+	url = https://github.com/whitedwarf2000/fork-ui.git
