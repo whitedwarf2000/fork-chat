@@ -15,7 +15,7 @@ const useChat = conversationId => {
 
     socketRef.current.on(NEW_CHAT_MESSAGE_EVENT, message => {
       // message is a object defined at line 31
-      setMessages(prevMessage => [...prevMessage, { ...message }]);
+      setMessages([{ ...message }]);
     });
 
     return () => {

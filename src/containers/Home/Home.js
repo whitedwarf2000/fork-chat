@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import api from 'api';
-
-import { CURRENT_USER_ID } from 'constants.js';
+import React, { useState } from 'react';
 
 import Conversation from 'containers/Conversation';
 import Direct from 'containers/Direct';
 
+import useAuth from 'hooks/useAuth';
+
 const Home = () => {
-  const [userInfo, setUserInfo] = useState({});
+  const { userInfo } = useAuth();
   const [currentChat, setCurrentChat] = useState(null);
 
   const handleStartConversation = convers => {
@@ -16,27 +15,13 @@ const Home = () => {
     }
   };
 
-  const fetchUser = async () => {
-    try {
-      const { data: user } = await api.get(`users/get/${CURRENT_USER_ID}`);
-
-      if (user) {
-        setUserInfo(user);
-      }
-    } catch (error) {
-      return error;
-    }
-  };
-
-  useEffect(() => {
-    fetchUser();
-  }, []);
-
   return (
     <div>
       <h1>Hi {userInfo?.username}</h1>
       <div className="conversation-wrapper">
-        {userInfo?._id ? <Conversation handleStartConversation={handleStartConversation} /> : null}
+        {userInfo?._id ? (
+          <Conversation userId={userInfo?._id} handleStartConversation={handleStartConversation} />
+        ) : null}
       </div>
       {currentChat ? (
         <Direct userId={userInfo?._id} currentChat={currentChat} />
