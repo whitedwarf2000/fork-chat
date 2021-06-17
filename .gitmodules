@@ -1,0 +1,3 @@
+[submodule "fork-ui"]
+	path = fork-ui
+	url = ../fork-ui.git
