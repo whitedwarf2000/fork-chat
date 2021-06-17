@@ -2,16 +2,14 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import api from 'api';
 
-import { CURRENT_USER_ID } from 'constants.js';
-
 import MemberConversation from './MemberConversation';
 
-const Conversation = ({ handleStartConversation }) => {
+const Conversation = ({ handleStartConversation, userId }) => {
   const [userConversations, setUserConversations] = useState([]);
 
-  const fetchConversations = async () => {
+  const fetchConversations = async id => {
     try {
-      const { data: conversations } = await api.get(`conversations/${CURRENT_USER_ID}`);
+      const { data: conversations } = await api.get(`conversations/${id}`);
       if (conversations) {
         setUserConversations(conversations);
       }
@@ -21,15 +19,17 @@ const Conversation = ({ handleStartConversation }) => {
   };
 
   useEffect(() => {
-    fetchConversations();
-  }, []);
+    if (userId) {
+      fetchConversations(userId);
+    }
+  }, [userId]);
 
   return (
     <>
       {userConversations.length > 0 ? (
         userConversations.map(c => (
           <div key={c._id} onClick={() => handleStartConversation(c)}>
-            <MemberConversation conversation={c} currentUserId={CURRENT_USER_ID} />
+            <MemberConversation conversation={c} currentUserId={userId} />
           </div>
         ))
       ) : (
@@ -41,6 +41,7 @@ const Conversation = ({ handleStartConversation }) => {
 
 Conversation.propTypes = {
   handleStartConversation: PropTypes.func,
+  userId: PropTypes.string,
 };
 Conversation.defaultProps = {
   handleStartConversation: f => f,
