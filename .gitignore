@@ -3,3 +3,5 @@ dist
 .DS_Store
 # jetbrains
 .idea
+.env.development
+.env.production
