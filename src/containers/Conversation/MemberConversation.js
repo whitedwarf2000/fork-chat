@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { Badge } from '@fork-ui/core';
 
 import api from 'api';
+
+import { Friend } from './conversationStyles';
 
 const MemberConversation = ({ conversation, currentUserId }) => {
   const [friend, setFriend] = useState({});
@@ -24,14 +27,15 @@ const MemberConversation = ({ conversation, currentUserId }) => {
   }, [conversation, currentUserId]);
 
   return (
-    <div className="conversation">
-      <img
-        className="conversation-img"
-        src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.kindpng.com%2Fimgv%2FixJomm_no-avatar-png-circle-transparent-png%2F&psig=AOvVaw0zTcJr_7aJA-ERZuk0TEJ9&ust=1623578790719000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMj5iMXskfECFQAAAAAdAAAAABAD"
-        alt=""
+    <Friend>
+      <Badge.Dot
+        color="var(--color-300)"
+        overlap
+        placement="bottom-end"
+        style={{ fontSize: '0.675em' }}
       />
-      <span className="conversation-name">{friend?.username}</span>
-    </div>
+      <span style={{ margin: '0 15px' }}>{friend?.username}</span>
+    </Friend>
   );
 };
 

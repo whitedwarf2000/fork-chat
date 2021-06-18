@@ -4,6 +4,8 @@ import api from 'api';
 
 import MemberConversation from './MemberConversation';
 
+import { ConversationWrapper } from './conversationStyles';
+
 const Conversation = ({ handleStartConversation, userId }) => {
   const [userConversations, setUserConversations] = useState([]);
 
@@ -25,7 +27,7 @@ const Conversation = ({ handleStartConversation, userId }) => {
   }, [userId]);
 
   return (
-    <>
+    <ConversationWrapper>
       {userConversations.length > 0 ? (
         userConversations.map(c => (
           <div key={c._id} onClick={() => handleStartConversation(c)}>
@@ -35,7 +37,7 @@ const Conversation = ({ handleStartConversation, userId }) => {
       ) : (
         <span>No Data</span>
       )}
-    </>
+    </ConversationWrapper>
   );
 };
 
