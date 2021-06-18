@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import { Avatar, Badge } from '@fork-ui/core';
 
 import Conversation from 'containers/Conversation';
 import Direct from 'containers/Direct';
 
 import useAuth from 'hooks/useAuth';
+
+import { LeftSidebar, User, ConversationList, HomeWrapper } from './homeStyles';
 
 const Home = () => {
   const { userInfo } = useAuth();
@@ -16,19 +19,29 @@ const Home = () => {
   };
 
   return (
-    <div>
-      <h1>Hi {userInfo?.username}</h1>
-      <div className="conversation-wrapper">
-        {userInfo?._id ? (
-          <Conversation userId={userInfo?._id} handleStartConversation={handleStartConversation} />
-        ) : null}
-      </div>
+    <HomeWrapper>
+      <LeftSidebar>
+        <User>
+          <Badge.Dot color="#0df316" overlap placement="bottom-end" style={{ fontSize: '0.675em' }}>
+            <Avatar src={userInfo?.profilePicture} />
+          </Badge.Dot>
+          <span style={{ margin: '0 15px' }}>{userInfo?.username}</span>
+        </User>
+        <ConversationList>
+          {userInfo?._id ? (
+            <Conversation
+              userId={userInfo?._id}
+              handleStartConversation={handleStartConversation}
+            />
+          ) : null}
+        </ConversationList>
+      </LeftSidebar>
       {currentChat && userInfo ? (
         <Direct user={userInfo} currentChat={currentChat} />
       ) : (
         <h3>No current chat</h3>
       )}
-    </div>
+    </HomeWrapper>
   );
 };
 
