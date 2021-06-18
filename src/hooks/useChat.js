@@ -2,10 +2,13 @@ import { useEffect, useRef, useState } from 'react';
 import { io } from 'socket.io-client';
 
 const NEW_CHAT_MESSAGE_EVENT = 'newChatMessageEvent';
-const SOCKET_SERVER_URL = 'https://fork-ui-websocket.herokuapp.com';
+const TYPING_EVENT = 'typing';
+const SOCKET_SERVER_URL = process.env.SOCKET_SERVER_URL;
 
 const useChat = conversationId => {
   const [messages, setMessages] = useState([]);
+  const [typing, setTyping] = useState(null);
+
   const socketRef = useRef(null);
 
   useEffect(() => {
@@ -18,6 +21,16 @@ const useChat = conversationId => {
       setMessages([{ ...message }]);
     });
 
+    socketRef.current.on(TYPING_EVENT, data => {
+      const { isTyping, sender } = data;
+
+      if (!isTyping) {
+        setTyping(null);
+      } else {
+        setTyping(sender);
+      }
+    });
+
     return () => {
       socketRef.current.disconnect();
     };
@@ -26,15 +39,24 @@ const useChat = conversationId => {
   const sendMessage = (newMessage, userId, receiverId) => {
     socketRef.current.emit(NEW_CHAT_MESSAGE_EVENT, {
       text: newMessage,
-      sender: userId,
+      senderId: userId,
       receiverId,
       conversationId,
+    });
+  };
+
+  const handleTyping = (newMessage, user) => {
+    socketRef.current.emit(TYPING_EVENT, {
+      isTyping: newMessage.length > 0,
+      sender: user,
     });
   };
 
   return {
     messages,
     sendMessage,
+    handleTyping,
+    typing,
   };
 };
 

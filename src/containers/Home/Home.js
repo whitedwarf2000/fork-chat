@@ -23,8 +23,8 @@ const Home = () => {
           <Conversation userId={userInfo?._id} handleStartConversation={handleStartConversation} />
         ) : null}
       </div>
-      {currentChat ? (
-        <Direct userId={userInfo?._id} currentChat={currentChat} />
+      {currentChat && userInfo ? (
+        <Direct user={userInfo} currentChat={currentChat} />
       ) : (
         <h3>No current chat</h3>
       )}

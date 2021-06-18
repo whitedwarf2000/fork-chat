@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 import api from 'api';
 import useChat from 'hooks/useChat';
 
-const AllMessage = ({ currentChat, userId }) => {
-  const { messages } = useChat(currentChat._id);
+const AllMessage = ({ currentChat, user }) => {
+  const { _id: userId } = user;
+  const { messages, typing } = useChat(currentChat._id);
   const [mess, setMess] = useState([]);
 
   const fetchMessageOfConversation = async conversationId => {
@@ -35,21 +36,22 @@ const AllMessage = ({ currentChat, userId }) => {
         mess.map((m, index) => (
           <p
             key={m._id || index}
-            className={`${userId === m.sender ? 'own-message' : 'message'}`}
-            style={{ textAlign: userId === m.sender ? 'end' : 'left' }}>
+            className={`${userId === m.senderId ? 'own-message' : 'message'}`}
+            style={{ textAlign: userId === m.senderId ? 'end' : 'left' }}>
             {m.text}
           </p>
         ))
       ) : (
         <h3>Start new conversation</h3>
       )}
+      {typing && typing?._id !== userId && <span>{typing?.username} is typing</span>}
     </div>
   );
 };
 
 AllMessage.propTypes = {
   currentChat: PropTypes.object,
-  userId: PropTypes.string,
+  user: PropTypes.object,
 };
 
 export default AllMessage;

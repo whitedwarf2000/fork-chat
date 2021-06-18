@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import api from 'api';
 
 import useChat from 'hooks/useChat';
 
-const MessageBox = ({ currentChat, userId }) => {
-  const { sendMessage } = useChat(currentChat._id);
+const MessageBox = ({ currentChat, user }) => {
+  const { _id: userId } = user;
+  const chatBoxRef = useRef(null);
+  const { sendMessage, handleTyping } = useChat(currentChat._id);
   const [currentMess, setCurrentMess] = useState('');
 
   const handleChangeMessage = event => {
@@ -16,12 +18,14 @@ const MessageBox = ({ currentChat, userId }) => {
   const handleSendMessage = async () => {
     const payload = {
       conversationId: currentChat._id,
-      sender: userId,
+      senderId: userId,
       text: currentMess,
     };
 
     const receiverId = currentChat.members.find(member => member !== userId);
     sendMessage(currentMess, userId, receiverId);
+    setCurrentMess('');
+    handleTyping('', user);
 
     try {
       await api.post('messages', {
@@ -30,13 +34,27 @@ const MessageBox = ({ currentChat, userId }) => {
     } catch (error) {
       return error;
     }
-
-    setCurrentMess('');
   };
+
+  useEffect(() => {
+    if (!chatBoxRef.current) {
+      return;
+    }
+    chatBoxRef.current.addEventListener('keyup', () => {
+      handleTyping(currentMess, user);
+    });
+
+    return () => {
+      chatBoxRef.current.removeEventListener('keyup', () => {
+        handleTyping(currentMess, user);
+      });
+    };
+  }, [chatBoxRef, currentMess, user]);
 
   return (
     <>
       <textarea
+        ref={chatBoxRef}
         value={currentMess}
         onChange={handleChangeMessage}
         placeholder="Write message..."
@@ -52,7 +70,7 @@ const MessageBox = ({ currentChat, userId }) => {
 
 MessageBox.propTypes = {
   currentChat: PropTypes.object,
-  userId: PropTypes.string,
+  user: PropTypes.object,
 };
 
 export default MessageBox;

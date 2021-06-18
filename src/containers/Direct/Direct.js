@@ -4,18 +4,18 @@ import PropTypes from 'prop-types';
 import MessageBox from './MessageBox';
 import AllMessage from './AllMessages';
 
-const Direct = ({ currentChat, userId }) => {
+const Direct = ({ currentChat, user }) => {
   return (
     <div>
-      <AllMessage userId={userId} currentChat={currentChat} />
-      <MessageBox userId={userId} currentChat={currentChat} />
+      <AllMessage user={user} currentChat={currentChat} />
+      <MessageBox user={user} currentChat={currentChat} />
     </div>
   );
 };
 
 Direct.propTypes = {
   currentChat: PropTypes.object,
-  userId: PropTypes.string,
+  user: PropTypes.object,
 };
 
 export default Direct;
