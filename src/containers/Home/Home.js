@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Avatar, Badge } from '@fork-ui/core';
 
 import Conversation from 'containers/Conversation';
 import Direct from 'containers/Direct';
+import CurrentControl from './CurrentControl';
 
 import useAuth from 'hooks/useAuth';
 
-import { LeftSidebar, User, ConversationList, HomeWrapper } from './homeStyles';
+import { LeftSidebar, ConversationList, HomeWrapper } from './homeStyles';
 
 const Home = () => {
   const { userInfo } = useAuth();
@@ -21,12 +21,8 @@ const Home = () => {
   return (
     <HomeWrapper>
       <LeftSidebar>
-        <User>
-          <Badge.Dot color="#0df316" overlap placement="bottom-end" style={{ fontSize: '0.675em' }}>
-            <Avatar src={userInfo?.profilePicture} />
-          </Badge.Dot>
-          <span style={{ margin: '0 15px' }}>{userInfo?.username}</span>
-        </User>
+        <CurrentControl />
+        <span style={{ margin: '0 15px' }}>{userInfo?.username}</span>
         <ConversationList>
           {userInfo?._id ? (
             <Conversation

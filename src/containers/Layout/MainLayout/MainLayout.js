@@ -1,8 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import LeftControl from 'containers/LeftControl';
+import RightControl from 'containers/RightControl';
+
+import { LayoutWrapper } from './mainLayoutStyles';
+
 const MainLayout = ({ children }) => {
-  return <div className="main-layout">{children}</div>;
+  return (
+    <LayoutWrapper>
+      <LeftControl />
+      {children}
+      <RightControl />
+    </LayoutWrapper>
+  );
 };
 
 MainLayout.propTypes = {
