@@ -1,13 +1,21 @@
 import React from 'react';
 
-import { SelectedControl } from './currentControlStyles';
+import ChevronLeft from '@fork-ui/icons/ChevronLeft';
+import { IconWrapper } from 'components/BaseStyles';
+
+import { SelectedControl, ControlContent, Divider } from './currentControlStyles';
 
 const CurrentControl = () => {
   return (
-    <div>
-      <div>[=]</div>
-      <div>Chat</div>
-    </div>
+    <>
+      <SelectedControl>
+        <IconWrapper>
+          <ChevronLeft size="20px" />
+        </IconWrapper>
+        <ControlContent>Chat</ControlContent>
+      </SelectedControl>
+      <Divider />
+    </>
   );
 };
 

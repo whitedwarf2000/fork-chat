@@ -2,9 +2,13 @@ import React, { useState } from 'react';
 
 import Conversation from 'containers/Conversation';
 import Direct from 'containers/Direct';
-import CurrentControl from './CurrentControl';
 
 import useAuth from 'hooks/useAuth';
+
+import CurrentControl from './CurrentControl';
+import UserInfo from './UserInfo';
+import Search from './Search';
+import LastChat from './LastChat';
 
 import { LeftSidebar, ConversationList, HomeWrapper } from './homeStyles';
 
@@ -22,7 +26,9 @@ const Home = () => {
     <HomeWrapper>
       <LeftSidebar>
         <CurrentControl />
-        <span style={{ margin: '0 15px' }}>{userInfo?.username}</span>
+        <UserInfo />
+        <Search />
+        <LastChat />
         <ConversationList>
           {userInfo?._id ? (
             <Conversation

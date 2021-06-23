@@ -1,8 +1,8 @@
 import React from 'react';
 import { Avatar, Badge } from '@fork-ui/core';
 
-import Alarm from '@fork-ui/icons/Alarm';
-import BrandGithub from '@fork-ui/icons/BrandGithub';
+import History from '@fork-ui/icons/History';
+import ToolsKitchen2 from '@fork-ui/icons/ToolsKitchen2';
 import ChartBar from '@fork-ui/icons/ChartBar';
 import ClipboardCheck from '@fork-ui/icons/ClipboardCheck';
 import Video from '@fork-ui/icons/Video';
@@ -21,19 +21,21 @@ const LeftControl = () => {
   return (
     <LeftControlWrapper data-id={LEFT_CONTROL_DATA_ID}>
       <ControlLogo>
-        <BrandGithub onClick={expand} size="35px" color="var(--color-300)" />
+        <ToolsKitchen2 onClick={expand} size="35px" color="var(--color-300)" />
       </ControlLogo>
       <div>
         <Control>
-          <Alarm size="20px" color="var(--color-300)" />
+          <History size="20px" color="var(--color-300)" />
           <ControlName expanded={expanded}>History</ControlName>
         </Control>
         <Control>
           <ClipboardCheck size="20px" color="var(--color-300)" />
           <ControlName expanded={expanded}>Your Work</ControlName>
         </Control>
-        <Control style={{ backgroundColor: '#a0ffc487' }}>
-          <ChartBar size="20px" color="#01ff8a" />
+        {/* temp color */}
+        <Control style={{ backgroundColor: '#E0F4F1' }}>
+          {/* temp color */}
+          <ChartBar size="20px" color="#00A389" />
           <ControlName expanded={expanded}>Analyst</ControlName>
         </Control>
         <Control>
@@ -46,7 +48,8 @@ const LeftControl = () => {
         </Control>
       </div>
       <User>
-        <Badge.Dot color="#0df316" overlap placement="bottom-end" style={{ fontSize: '0.675em' }}>
+        {/* temp color */}
+        <Badge.Dot color="#10C2A5" overlap placement="bottom-end" style={{ fontSize: '0.675em' }}>
           <Avatar src={userInfo?.profilePicture} />
         </Badge.Dot>
       </User>

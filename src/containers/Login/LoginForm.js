@@ -105,7 +105,7 @@ const LoginForm = () => {
         <Button
           loading={isLoading}
           type="submit"
-          style={{ width: '100%', borderRadius: '8px', margin: '20px 0' }}
+          style={{ width: '100%', borderRadius: 'var(--border-radius-medium)', margin: '20px 0' }}
           color="primary">
           LOGIN
         </Button>

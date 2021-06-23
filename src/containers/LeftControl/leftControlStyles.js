@@ -21,11 +21,11 @@ export const User = styled.div`
 export const Control = styled.div`
   display: flex;
   align-items: center;
-  height: 50px;
+  height: 40px;
   min-width: 50px;
   margin: 0.3em 0;
   padding: 0 0.8em;
-  border-radius: 16px;
+  border-radius: var(--border-radius-medium);
 `;
 
 export const ControlName = styled.div`

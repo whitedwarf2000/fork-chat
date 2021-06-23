@@ -12,7 +12,7 @@ const Input = styled.input`
   background-color: var(--mv-bg-color);
   border: 1px solid var(--border-color);
   box-sizing: border-box;
-  border-radius: 8px;
+  border-radius: var(--border-radius-medium);
   padding: 0.625em 1em;
   margin-bottom: 5px;
   width: 100%;

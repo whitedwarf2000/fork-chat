@@ -30,6 +30,7 @@ body.light-mode {
   --color-200: #{$light--200};
   --color-300: #{$dark--100};
   --color-400: #{$dark--300};
+  --dark: #{$dark--main};
 
   --border-color: #{$border-color};
   --scrollbar: #{$scrollbar};
@@ -37,7 +38,7 @@ body.light-mode {
   --scrollbar-thumb: #{$scrollbar-thumb};
 
   display: block;
-  background-color: var(--bg-color);
+  background-color: var(--mv-bg-color);
   color: var(--text-color);
 
   overflow: hidden;
@@ -58,6 +59,10 @@ body.light-mode {
     border-radius: var(--border-radius-medium);
     background-color: var(--scrollbar-thumb);
   }
+
+  --border-radius-small: #{$border-radius-small};
+  --border-radius-medium: #{$border-radius-medium};
+  --border-radius-large: #{$border-radius-large};
 }
 
 textarea:focus, input:focus{
