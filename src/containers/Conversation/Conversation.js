@@ -3,13 +3,17 @@ import PropTypes from 'prop-types';
 import api from 'api';
 
 import MemberConversation from './MemberConversation';
+import NoConversation from './NoConversation';
+import ConversationSkeleton from '../Conversation/ConversationSkeleton';
 
 import { ConversationWrapper } from './conversationStyles';
 
 const Conversation = ({ handleStartConversation, userId }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [userConversations, setUserConversations] = useState([]);
 
   const fetchConversations = async id => {
+    setIsLoading(true);
     try {
       const { data: conversations } = await api.get(`conversations/${id}`);
       if (conversations) {
@@ -18,6 +22,7 @@ const Conversation = ({ handleStartConversation, userId }) => {
     } catch (error) {
       return error;
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -34,8 +39,15 @@ const Conversation = ({ handleStartConversation, userId }) => {
             <MemberConversation conversation={c} currentUserId={userId} />
           </div>
         ))
+      ) : isLoading ? (
+        <>
+          <ConversationSkeleton />
+          <ConversationSkeleton />
+          <ConversationSkeleton />
+          <ConversationSkeleton />
+        </>
       ) : (
-        <span>No Data</span>
+        <NoConversation />
       )}
     </ConversationWrapper>
   );

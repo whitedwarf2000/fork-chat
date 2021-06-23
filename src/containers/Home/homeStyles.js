@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 
 export const LeftSidebar = styled.div`
-  width: 250px;
+  width: 300px;
   height: 100vh;
   border-left: 1px solid var(--color-200);
-  border-top-left-radius: 16px;
+  border-top-left-radius: var(--border-radius-large);
+  border-bottom-left-radius: var(--border-radius-large);
   padding: 1em;
 `;
 
