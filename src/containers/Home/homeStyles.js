@@ -13,4 +13,5 @@ export const ConversationList = styled.div``;
 
 export const HomeWrapper = styled.div`
   display: flex;
+  flex-grow: 1;
 `;

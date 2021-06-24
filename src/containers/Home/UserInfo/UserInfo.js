@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, Badge, Button } from '@fork-ui/core';
+import { Avatar, Badge, Button, Popover } from '@fork-ui/core';
 
 import Settings from '@fork-ui/icons/Settings';
 import ChevronDown from '@fork-ui/icons/ChevronDown';
@@ -29,7 +29,13 @@ const UserInfo = () => {
           <ChevronDown />
         </Button>
       </div>
-      <Settings size="12px" />
+      <div>
+        <Popover animation="shift-away" overlay={<div>Your settings</div>} placement="right">
+          <span>
+            <Settings size="12px" />
+          </span>
+        </Popover>
+      </div>
     </UserInfoWrapper>
   );
 };

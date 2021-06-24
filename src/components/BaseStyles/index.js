@@ -9,3 +9,9 @@ export const IconWrapper = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
+export const H3 = styled.h3`
+  font-size: 22px;
+  color: var(--dark);
+  font-weight: 500;
+`;

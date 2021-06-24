@@ -23,7 +23,7 @@ export const FormWrapper = styled.div`
 export const ForgotPassword = styled.div`
   text-align: end;
   font-size: 12px;
-  font-weight: bold;
+  font-weight: 500;
   font-style: italic;
   color: var(--color-300);
   cursor: pointer;
@@ -31,6 +31,6 @@ export const ForgotPassword = styled.div`
 
 export const Signup = styled.div`
   text-align: center;
-  font-weight: bold;
+  font-weight: 500;
   color: var(--color-300);
 `;
