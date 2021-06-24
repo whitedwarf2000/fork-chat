@@ -47,7 +47,7 @@ const AllMessage = ({ currentChat, user }) => {
 
   return (
     <AllMessageBox>
-      {mess.length > 0 ? (
+      {mess.length > 0 &&
         mess.map((m, index) => (
           <Tooltip
             arrow={false}
@@ -68,10 +68,7 @@ const AllMessage = ({ currentChat, user }) => {
             }>
             <Message ownMessage={userId === m.senderId}>{m.text}</Message>
           </Tooltip>
-        ))
-      ) : (
-        <h3>Start new conversation</h3>
-      )}
+        ))}
       {typing && typing?._id !== userId && (
         <BaseFlex>
           <Loader.Dots size="0.5em" />
