@@ -3,16 +3,21 @@ import { Tooltip as ForkTooltip } from '@fork-ui/core';
 
 import { BaseFlex } from 'components/BaseStyles';
 
-export const DirectWrapper = styled.div``;
+export const DirectWrapper = styled.div`
+  min-width: 60%;
+`;
 
 export const AllMessageBox = styled.div`
-  width: 100%;
-  height: 100%;
+  height: 86%;
+  justify-content: flex-end;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const MessageBoxWrapper = styled.div`
   position: absolute;
   bottom: 23px;
+  width: 100%;
 `;
 
 export const Message = styled.div`
