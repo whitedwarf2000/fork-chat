@@ -2,12 +2,12 @@ import styled from 'styled-components';
 
 import wfh from '../../../assets/images/work_from_home.png';
 
-export const AuthWrapper = styled.div`
+import { BaseFlex } from 'components/BaseStyles';
+
+export const AuthWrapper = styled(BaseFlex)`
   height: 100vh;
   width: 100%;
   overflow-y: scroll;
-  display: flex;
-  align-items: center;
   padding: 0em 12em;
 
   -ms-overflow-style: none;

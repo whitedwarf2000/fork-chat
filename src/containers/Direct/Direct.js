@@ -1,15 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import ChatBoxLayout from 'components/ChatBoxLayout';
+
 import MessageBox from './MessageBox';
 import AllMessage from './AllMessages';
 
+import { DirectWrapper } from './directStyles';
+
 const Direct = ({ currentChat, user }) => {
   return (
-    <div>
-      <AllMessage user={user} currentChat={currentChat} />
-      <MessageBox user={user} currentChat={currentChat} />
-    </div>
+    <DirectWrapper>
+      <ChatBoxLayout title="Group Chat">
+        <AllMessage user={user} currentChat={currentChat} />
+        <MessageBox user={user} currentChat={currentChat} />
+      </ChatBoxLayout>
+    </DirectWrapper>
   );
 };
 

@@ -1,16 +1,15 @@
 import styled from 'styled-components';
+import { BaseFlex } from 'components/BaseStyles';
 
 export const Logo = styled.div`
   width: 300px;
 `;
 
-export const LoginWrapper = styled.div`
+export const LoginWrapper = styled(BaseFlex)`
   width: 500px;
   margin: 0 auto;
   padding: 1em;
-  display: flex;
   flex-direction: column;
-  align-items: center;
   background-color: var(--white-rgb);
   backdrop-filter: saturate(180%) blur(5px);
 `;

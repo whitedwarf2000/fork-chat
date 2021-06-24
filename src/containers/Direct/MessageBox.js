@@ -5,6 +5,8 @@ import api from 'api';
 
 import useChat from 'hooks/useChat';
 
+import { MessageBoxWrapper } from './directStyles';
+
 const MessageBox = ({ currentChat, user }) => {
   const { _id: userId } = user;
   const chatBoxRef = useRef(null);
@@ -52,19 +54,19 @@ const MessageBox = ({ currentChat, user }) => {
   }, [chatBoxRef, currentMess, user]);
 
   return (
-    <>
+    <MessageBoxWrapper>
       <textarea
         ref={chatBoxRef}
         value={currentMess}
         onChange={handleChangeMessage}
         placeholder="Write message..."
-        style={{ width: '300px', resize: 'none', minHeight: '30px', maxHeight: '100px' }}
+        style={{ resize: 'none', minHeight: '30px', maxHeight: '100px' }}
         className="new-message-input-field"
       />
       <button onClick={handleSendMessage} className="send-message-button">
         Send
       </button>
-    </>
+    </MessageBoxWrapper>
   );
 };
 

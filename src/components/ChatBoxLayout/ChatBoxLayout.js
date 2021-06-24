@@ -7,6 +7,7 @@ import {
   ChatBoxHeader,
   ChatBoxTitle,
   ChatBoxMenu,
+  ChatBoxContent,
 } from './chatBoxLayoutStyles';
 
 const ChatBoxLayout = ({ title, children }) => {
@@ -34,7 +35,7 @@ const ChatBoxLayout = ({ title, children }) => {
           </Button>
         </ChatBoxMenu>
       </ChatBoxHeader>
-      <div>{children}</div>
+      <ChatBoxContent>{children}</ChatBoxContent>
     </ChatBoxLayoutWrapper>
   );
 };

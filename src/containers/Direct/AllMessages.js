@@ -1,8 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
+import { Loader } from '@fork-ui/core';
+import Dots from '@fork-ui/icons/Dots';
+import ArrowBackUp from '@fork-ui/icons/ArrowBackUp';
+import MoodSmile from '@fork-ui/icons/MoodSmile';
+
 import api from 'api';
 import useChat from 'hooks/useChat';
+
+import { BaseFlex } from 'components/BaseStyles';
+
+import {
+  AllMessageBox,
+  Message,
+  Tooltip,
+  MessageControlWrapper,
+  MessageControlItem,
+} from './directStyles';
 
 const AllMessage = ({ currentChat, user }) => {
   const { _id: userId } = user;
@@ -31,21 +46,39 @@ const AllMessage = ({ currentChat, user }) => {
   }, [messages]);
 
   return (
-    <div className="message-wrapper" style={{ width: '300px', height: '300px' }}>
+    <AllMessageBox>
       {mess.length > 0 ? (
         mess.map((m, index) => (
-          <p
+          <Tooltip
+            arrow={false}
+            placement="left"
             key={m._id || index}
-            className={`${userId === m.senderId ? 'own-message' : 'message'}`}
-            style={{ textAlign: userId === m.senderId ? 'end' : 'left' }}>
-            {m.text}
-          </p>
+            title={
+              <MessageControlWrapper>
+                <MessageControlItem>
+                  <Dots />
+                </MessageControlItem>
+                <MessageControlItem>
+                  <ArrowBackUp />
+                </MessageControlItem>
+                <MessageControlItem>
+                  <MoodSmile />
+                </MessageControlItem>
+              </MessageControlWrapper>
+            }>
+            <Message ownMessage={userId === m.senderId}>{m.text}</Message>
+          </Tooltip>
         ))
       ) : (
         <h3>Start new conversation</h3>
       )}
-      {typing && typing?._id !== userId && <span>{typing?.username} is typing</span>}
-    </div>
+      {typing && typing?._id !== userId && (
+        <BaseFlex>
+          <Loader.Dots size="0.5em" />
+          <div style={{ marginLeft: '5px' }}>{typing?.username} is typing</div>
+        </BaseFlex>
+      )}
+    </AllMessageBox>
   );
 };
 
