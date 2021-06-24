@@ -13,7 +13,7 @@ html {
 body.dark-mode {
   --text-color: #{$dark--main};
 
-  --mvbg-color: #{$light-main};
+  --bg-color: #{$light-main};
 
   --color--200: #{$light--200};
   --color--100: #{$light--100};
@@ -22,7 +22,7 @@ body.dark-mode {
 
 body.light-mode {
   --text-color: #{$dark--100};
-  --mv-bg-color: #{$light-main};
+  --bg-color: #{$light-main};
   --white-rgb: #{$white-rgb};
 
   --color-700: #{$color-700};

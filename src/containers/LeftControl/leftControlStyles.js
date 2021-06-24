@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+import { BaseFlex } from 'components/BaseStyles';
 import { LEFT_CONTROL_WIDTH } from 'constants.js';
 
 export const LeftControlWrapper = styled.div`
@@ -12,15 +13,11 @@ export const LeftControlWrapper = styled.div`
   transition: width 0.2s ease-in-out;
 `;
 
-export const User = styled.div`
-  display: flex;
-  align-items: center;
+export const User = styled(BaseFlex)`
   justify-content: center;
 `;
 
-export const Control = styled.div`
-  display: flex;
-  align-items: center;
+export const Control = styled(BaseFlex)`
   height: 40px;
   min-width: 50px;
   margin: 0.3em 0;

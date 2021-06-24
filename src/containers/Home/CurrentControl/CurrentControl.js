@@ -1,9 +1,9 @@
 import React from 'react';
 
 import ChevronLeft from '@fork-ui/icons/ChevronLeft';
-import { IconWrapper } from 'components/BaseStyles';
+import { IconWrapper, Divider } from 'components/BaseStyles';
 
-import { SelectedControl, ControlContent, Divider } from './currentControlStyles';
+import { SelectedControl, ControlContent } from './currentControlStyles';
 
 const CurrentControl = () => {
   return (

@@ -43,7 +43,7 @@ const MemberConversation = ({ conversation, currentUserId }) => {
           <div style={{ color: '#071232', fontWeight: '500 ' }}>{friend?.username}</div>
           <div>11:00</div>
         </div>
-        <div>typing...</div>
+        <div>Hey yo bro!</div>
       </div>
     </Friend>
   );
