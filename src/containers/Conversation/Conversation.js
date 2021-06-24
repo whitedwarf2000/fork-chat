@@ -40,12 +40,12 @@ const Conversation = ({ handleStartConversation, userId }) => {
           </div>
         ))
       ) : isLoading ? (
-        <>
+        <div className="fskele-animated">
           <ConversationSkeleton />
           <ConversationSkeleton />
           <ConversationSkeleton />
           <ConversationSkeleton />
-        </>
+        </div>
       ) : (
         <NoConversation />
       )}

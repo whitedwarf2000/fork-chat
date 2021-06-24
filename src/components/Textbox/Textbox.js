@@ -26,7 +26,7 @@ const InputWrapper = styled.div`
 const InputLabel = styled.div`
   color: var(--color-700);
   font-style: normal;
-  font-weight: bold;
+  font-weight: 500;
   font-size: 10px;
   line-height: 16px;
   text-transform: uppercase;

@@ -9,6 +9,7 @@ import CurrentControl from './CurrentControl';
 import UserInfo from './UserInfo';
 import Search from './Search';
 import LastChat from './LastChat';
+import NoCurrentChat from './NoCurrentChat';
 
 import { LeftSidebar, ConversationList, HomeWrapper } from './homeStyles';
 
@@ -41,7 +42,7 @@ const Home = () => {
       {currentChat && userInfo ? (
         <Direct user={userInfo} currentChat={currentChat} />
       ) : (
-        <h3>No current chat</h3>
+        <NoCurrentChat />
       )}
     </HomeWrapper>
   );

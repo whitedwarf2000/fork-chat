@@ -1,7 +1,7 @@
 import React from 'react';
 
 const RightControl = () => {
-  return <h2>Rightcontropl</h2>;
+  return <h2>Right control</h2>;
 };
 
 export default RightControl;

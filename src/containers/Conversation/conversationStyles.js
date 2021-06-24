@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 
+import { COMMON_HEADER_HEIGHT } from 'constants.js';
+
 export const Friend = styled.div`
   display: flex;
   align-items: center;
-  min-height: 70px;
+  min-height: ${COMMON_HEADER_HEIGHT};
   padding: 0 1em;
   transition: all 0.2s;
   cursor: pointer;
@@ -14,4 +16,8 @@ export const Friend = styled.div`
   }
 `;
 
-export const ConversationWrapper = styled.div``;
+export const ConversationWrapper = styled.div`
+  height: 300px;
+  overflow-y: scroll;
+  padding-bottom: 3em;
+`;

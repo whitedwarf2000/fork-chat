@@ -1,15 +1,14 @@
 import styled from 'styled-components';
 
+import { H3 } from 'components/BaseStyles';
+
 export const SelectedControl = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 1em;
 `;
 
-export const ControlContent = styled.h3`
-  font-size: 24px;
-  color: var(--dark);
-  font-weight: bold;
+export const ControlContent = styled(H3)`
   margin: 0 1em;
 `;
 

@@ -1,14 +1,13 @@
 import styled from 'styled-components';
 
+import { H3 } from 'components/BaseStyles';
+
 export const UserInfoWrapper = styled.div`
   margin: 1.5em 0;
   display: flex;
   justify-content: center;
 `;
 
-export const UserName = styled.h3`
-  font-size: 24px;
-  color: var(--dark);
-  font-weight: bold;
+export const UserName = styled(H3)`
   margin: 0 1em;
 `;

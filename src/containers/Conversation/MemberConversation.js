@@ -38,9 +38,9 @@ const MemberConversation = ({ conversation, currentUserId }) => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            width: '190px',
+            width: '165px',
           }}>
-          <div style={{ color: '#071232', fontWeight: 'bold ' }}>{friend?.username}</div>
+          <div style={{ color: '#071232', fontWeight: '500 ' }}>{friend?.username}</div>
           <div>11:00</div>
         </div>
         <div>typing...</div>

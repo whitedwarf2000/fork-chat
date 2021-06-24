@@ -10,7 +10,7 @@ const LastChat = () => {
   return (
     <LastChatWrapper>
       {/* temp color */}
-      <h3 style={{ fontWeight: 'bold', color: '#6F7884' }}>Last chat</h3>
+      <h3 style={{ fontWeight: '500', color: '#6F7884' }}>Last chat</h3>
       <AddNewConversation>
         {/* temp color */}
         <IconWrapper

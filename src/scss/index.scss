@@ -2,6 +2,7 @@
 
 html {
   font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
   box-sizing: border-box;
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
@@ -46,7 +47,7 @@ body.light-mode {
   scrollbar-width: thin;
 
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 3px;
     background-color: var(--scrollbar);
   }
 
