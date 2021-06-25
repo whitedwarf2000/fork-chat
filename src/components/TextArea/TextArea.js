@@ -23,7 +23,6 @@ const AreaWrapper = styled(BaseFlex)`
   background-color: var(--bg-color);
   border-radius: var(--border-radius-large);
   padding: 0.625em 1em;
-  width: 96%;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 `;
 const ControlWrapper = styled(BaseFlex)`

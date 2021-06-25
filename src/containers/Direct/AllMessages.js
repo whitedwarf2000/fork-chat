@@ -12,6 +12,7 @@ import useChat from 'hooks/useChat';
 import { BaseFlex } from 'components/BaseStyles';
 
 import {
+  AllMessageBoxWrapper,
   AllMessageBox,
   Message,
   Tooltip,
@@ -42,6 +43,51 @@ const AllMessage = ({ currentChat, user }) => {
     setIsFetchingMess(false);
   };
 
+  const renderAllMessages = mess => {
+    return mess.map((m, index) => {
+      let isShowAvatar = true;
+      const own = userId === m.senderId;
+      if (mess[index - 1]) {
+        // check next message still belong to current user
+        isShowAvatar = mess[index - 1]?.senderId !== mess[index]?.senderId;
+      }
+      return (
+        <Tooltip
+          arrow={false}
+          placement={own ? 'left' : 'right'}
+          key={m._id || index}
+          title={
+            <MessageControlWrapper>
+              <MessageControlItem>
+                <Dots />
+              </MessageControlItem>
+              <MessageControlItem>
+                <ArrowBackUp />
+              </MessageControlItem>
+              <MessageControlItem>
+                <MoodSmile />
+              </MessageControlItem>
+            </MessageControlWrapper>
+          }>
+          <Mess ownMessage={own}>
+            {!own && isShowAvatar && (
+              <div style={{ marginRight: '10px' }}>
+                <Avatar size={40}>B</Avatar>
+              </div>
+            )}
+            {!own &&
+              !isShowAvatar && ( // Dummy avatar spacing
+                <div style={{ marginRight: '10px' }}>
+                  <div style={{ width: '40px' }} />
+                </div>
+              )}
+            <Message ownMessage={own}>{m.text}</Message>
+          </Mess>
+        </Tooltip>
+      );
+    });
+  };
+
   useEffect(() => {
     if (currentChat?._id) {
       fetchMessageOfConversation(currentChat._id);
@@ -53,54 +99,23 @@ const AllMessage = ({ currentChat, user }) => {
   }, [messages]);
 
   return (
-    <AllMessageBox>
-      {isFetchingMess ? (
-        <div style={{ position: 'absolute', top: '50%', left: '50%' }}>
-          <Loader.NiceSpinner />
-        </div>
-      ) : (
-        mess.length > 0 &&
-        mess.map((m, index) => {
-          const own = userId === m.senderId;
-          return (
-            <Tooltip
-              arrow={false}
-              placement={own ? 'left' : 'right'}
-              key={m._id || index}
-              title={
-                <MessageControlWrapper>
-                  <MessageControlItem>
-                    <Dots />
-                  </MessageControlItem>
-                  <MessageControlItem>
-                    <ArrowBackUp />
-                  </MessageControlItem>
-                  <MessageControlItem>
-                    <MoodSmile />
-                  </MessageControlItem>
-                </MessageControlWrapper>
-              }>
-              <Mess ownMessage={own}>
-                {!own && (
-                  <div style={{ marginRight: '10px' }}>
-                    <Avatar size={40} src={m?.profilePicture}>
-                      B
-                    </Avatar>
-                  </div>
-                )}
-                <Message ownMessage={own}>{m.text}</Message>
-              </Mess>
-            </Tooltip>
-          );
-        })
-      )}
-      {typing && typing?._id !== userId && (
-        <BaseFlex>
-          <Loader.Dots size="0.5em" />
-          <div style={{ marginLeft: '5px' }}>{typing?.username} is typing</div>
-        </BaseFlex>
-      )}
-    </AllMessageBox>
+    <AllMessageBoxWrapper>
+      <AllMessageBox>
+        {isFetchingMess ? (
+          <div style={{ position: 'absolute', top: '50%', left: '50%' }}>
+            <Loader.NiceSpinner />
+          </div>
+        ) : (
+          mess.length > 0 && renderAllMessages(mess)
+        )}
+        {typing && typing?._id !== userId && (
+          <BaseFlex>
+            <Loader.Dots size="0.5em" />
+            <div style={{ marginLeft: '5px' }}>{typing?.username} is typing</div>
+          </BaseFlex>
+        )}
+      </AllMessageBox>
+    </AllMessageBoxWrapper>
   );
 };
 

@@ -20,10 +20,10 @@ export const ChatBoxHeader = styled(BaseFlex)`
 export const ChatBoxTitle = styled(H3)``;
 export const ChatBoxMenu = styled.div``;
 export const ChatBoxContent = styled.div`
-  position: relative;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  padding: 1em 1.2em;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
   background-color: #edeff4; // temp color
-  height: 90vh; // 90vh instead of 100vh to ignore 75px of chat box header
+  min-height: 90vh;
+  max-height: 90vh; // 90vh instead of 100vh to ignore 75px of chat box header
 `;
