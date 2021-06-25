@@ -9,5 +9,5 @@ export const UserInfoWrapper = styled.div`
 `;
 
 export const UserName = styled(H3)`
-  margin: 0 1em;
+  margin: 0.5em 0;
 `;

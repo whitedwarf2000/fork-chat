@@ -14,7 +14,7 @@ export const IconWrapper = styled(BaseFlex)`
 `;
 
 export const H3 = styled.h3`
-  font-size: 22px;
+  font-size: 18px;
   color: var(--dark);
   font-weight: 500;
 `;

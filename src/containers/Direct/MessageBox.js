@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { Button } from '@fork-ui/core';
-import BrandTelegram from '@fork-ui/icons/BrandTelegram';
+import Send from '@fork-ui/icons/Send';
 import MoodSmile from '@fork-ui/icons/MoodSmile';
 import PaperClip from '@fork-ui/icons/PaperClip';
 
@@ -78,7 +78,6 @@ const MessageBox = ({ currentChat, user }) => {
                 backgroundColor: 'transparent',
                 borderRadius: 'var(--border-radius-medium)',
                 minWidth: '40px',
-                margin: '0 0.5em',
               }}
               icon={<MoodSmile size="20px" />}
             />
@@ -88,7 +87,7 @@ const MessageBox = ({ currentChat, user }) => {
                 backgroundColor: 'transparent',
                 borderRadius: 'var(--border-radius-medium)',
                 minWidth: '40px',
-                margin: '0 0.5em',
+                margin: '0 1em',
               }}
               icon={<PaperClip size="20px" />}
             />
@@ -100,7 +99,7 @@ const MessageBox = ({ currentChat, user }) => {
                 borderRadius: 'var(--border-radius-medium)',
                 minWidth: '40px',
               }}
-              icon={<BrandTelegram size="20px" />}
+              icon={<Send size="20px" />}
             />
           </>
         }

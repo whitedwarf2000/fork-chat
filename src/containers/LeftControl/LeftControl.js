@@ -9,14 +9,14 @@ import Video from '@fork-ui/icons/Video';
 import Users from '@fork-ui/icons/Users';
 
 import useAuth from 'hooks/useAuth';
-import useCollapseControl from 'containers/LeftControl/useCollapseControl';
+import useCollapseControl from './useCollapseControl';
 
 import { LeftControlWrapper, User, Control, ControlName, ControlLogo } from './leftControlStyles';
 import { LEFT_CONTROL_DATA_ID } from 'constants.js';
 
 const LeftControl = () => {
   const { userInfo } = useAuth();
-  const { expanded, expand } = useCollapseControl();
+  const { expanded, expand } = useCollapseControl(LEFT_CONTROL_DATA_ID, 180);
 
   return (
     <LeftControlWrapper data-id={LEFT_CONTROL_DATA_ID}>

@@ -1,14 +1,13 @@
 import styled from 'styled-components';
 
 import { H3, BaseFlex } from 'components/BaseStyles';
-import { COMMON_HEADER_HEIGHT } from 'constants.js';
 
 export const ChatBoxLayoutWrapper = styled.div`
-  min-width: 60%;
+  width: 100%;
 `;
 
 export const ChatBoxHeader = styled(BaseFlex)`
-  height: ${COMMON_HEADER_HEIGHT};
+  height: 65px;
   background-color: #edeff4; // temp color
   backdrop-filter: saturate(180%) blur(5px);
   padding: 1em;

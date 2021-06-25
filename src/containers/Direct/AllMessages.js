@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import { Loader } from '@fork-ui/core';
+import { Loader, Avatar } from '@fork-ui/core';
 import Dots from '@fork-ui/icons/Dots';
 import ArrowBackUp from '@fork-ui/icons/ArrowBackUp';
 import MoodSmile from '@fork-ui/icons/MoodSmile';
@@ -17,14 +17,19 @@ import {
   Tooltip,
   MessageControlWrapper,
   MessageControlItem,
+  Mess,
 } from './directStyles';
 
 const AllMessage = ({ currentChat, user }) => {
   const { _id: userId } = user;
   const { messages, typing } = useChat(currentChat._id);
+
+  const [isFetchingMess, setIsFetchingMess] = useState(false);
   const [mess, setMess] = useState([]);
 
   const fetchMessageOfConversation = async conversationId => {
+    setIsFetchingMess(true);
+
     try {
       const { data: messages } = await api.get(`/messages/${conversationId}`);
       if (messages) {
@@ -33,6 +38,8 @@ const AllMessage = ({ currentChat, user }) => {
     } catch (error) {
       return error;
     }
+
+    setIsFetchingMess(false);
   };
 
   useEffect(() => {
@@ -47,28 +54,46 @@ const AllMessage = ({ currentChat, user }) => {
 
   return (
     <AllMessageBox>
-      {mess.length > 0 &&
-        mess.map((m, index) => (
-          <Tooltip
-            arrow={false}
-            placement="left"
-            key={m._id || index}
-            title={
-              <MessageControlWrapper>
-                <MessageControlItem>
-                  <Dots />
-                </MessageControlItem>
-                <MessageControlItem>
-                  <ArrowBackUp />
-                </MessageControlItem>
-                <MessageControlItem>
-                  <MoodSmile />
-                </MessageControlItem>
-              </MessageControlWrapper>
-            }>
-            <Message ownMessage={userId === m.senderId}>{m.text}</Message>
-          </Tooltip>
-        ))}
+      {isFetchingMess ? (
+        <div style={{ position: 'absolute', top: '50%', left: '50%' }}>
+          <Loader.NiceSpinner />
+        </div>
+      ) : (
+        mess.length > 0 &&
+        mess.map((m, index) => {
+          const own = userId === m.senderId;
+          return (
+            <Tooltip
+              arrow={false}
+              placement={own ? 'left' : 'right'}
+              key={m._id || index}
+              title={
+                <MessageControlWrapper>
+                  <MessageControlItem>
+                    <Dots />
+                  </MessageControlItem>
+                  <MessageControlItem>
+                    <ArrowBackUp />
+                  </MessageControlItem>
+                  <MessageControlItem>
+                    <MoodSmile />
+                  </MessageControlItem>
+                </MessageControlWrapper>
+              }>
+              <Mess ownMessage={own}>
+                {!own && (
+                  <div style={{ marginRight: '10px' }}>
+                    <Avatar size={40} src={m?.profilePicture}>
+                      B
+                    </Avatar>
+                  </div>
+                )}
+                <Message ownMessage={own}>{m.text}</Message>
+              </Mess>
+            </Tooltip>
+          );
+        })
+      )}
       {typing && typing?._id !== userId && (
         <BaseFlex>
           <Loader.Dots size="0.5em" />

@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
 import { BaseFlex } from 'components/BaseStyles';
-import { LEFT_CONTROL_WIDTH } from 'constants.js';
+import { CONTROL_WIDTH_COLLAPSED } from 'constants.js';
 
 export const LeftControlWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: ${LEFT_CONTROL_WIDTH};
+  width: ${CONTROL_WIDTH_COLLAPSED};
   padding: 1em;
   text-align: center;
   justify-content: space-between;
@@ -18,7 +18,7 @@ export const User = styled(BaseFlex)`
 `;
 
 export const Control = styled(BaseFlex)`
-  height: 40px;
+  height: 50px;
   min-width: 50px;
   margin: 0.3em 0;
   padding: 0 0.8em;
