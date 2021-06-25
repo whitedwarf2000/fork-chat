@@ -7,22 +7,27 @@ export const DirectWrapper = styled.div`
   width: 100%;
 `;
 
+export const AllMessageBoxWrapper = styled.div`
+  min-height: 75vh; // Default height for no message layout
+  max-height: 75vh;
+  padding: 1em 1.2em;
+  overflow: hidden auto;
+`;
+
 export const AllMessageBox = styled.div`
-  height: 86%;
   justify-content: flex-end;
   display: flex;
   flex-direction: column;
-  position: relative;
 `;
 
 export const MessageBoxWrapper = styled.div`
-  position: absolute;
-  bottom: 23px;
-  width: 100%;
+  padding: 1em;
+  background-color: #edeff4; // temp color
 `;
 
 export const Mess = styled(BaseFlex)`
   align-self: ${props => (props.ownMessage ? 'flex-end' : 'flex-start')};
+  max-width: 80%;
 `;
 export const Message = styled.div`
   min-height: 45px;
