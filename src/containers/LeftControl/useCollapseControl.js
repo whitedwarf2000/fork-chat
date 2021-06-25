@@ -1,22 +1,22 @@
 import { useEffect, useState } from 'react';
 
-import { LEFT_CONTROL_DATA_ID, LEFT_CONTROL_WIDTH } from 'constants.js';
+import { CONTROL_WIDTH_COLLAPSED } from 'constants.js';
 
-const useCollapseControl = () => {
-  const leftControlNode = document.querySelector(`[data-id=${LEFT_CONTROL_DATA_ID}]`);
+const useCollapseControl = (queryNodeId, expandWidth) => {
+  const node = document.querySelector(`[data-id=${queryNodeId}]`);
 
   const [isExpanded, setIsExpanded] = useState(false);
 
   const expandControl = () => {
-    leftControlNode.style.width = '180px';
+    node.style.width = `${expandWidth}px` || '180px';
   };
 
   const collapseControl = () => {
-    leftControlNode.style.width = LEFT_CONTROL_WIDTH;
+    node.style.width = CONTROL_WIDTH_COLLAPSED;
   };
 
   useEffect(() => {
-    if (!leftControlNode) {
+    if (!node) {
       return;
     }
 
@@ -25,7 +25,7 @@ const useCollapseControl = () => {
     } else {
       expandControl();
     }
-  }, [leftControlNode, isExpanded]);
+  }, [node, isExpanded]);
 
   const handleExpand = () => {
     setIsExpanded(prevValue => !prevValue);

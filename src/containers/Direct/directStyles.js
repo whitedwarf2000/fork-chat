@@ -4,7 +4,7 @@ import { Tooltip as ForkTooltip } from '@fork-ui/core';
 import { BaseFlex } from 'components/BaseStyles';
 
 export const DirectWrapper = styled.div`
-  min-width: 60%;
+  width: 100%;
 `;
 
 export const AllMessageBox = styled.div`
@@ -12,6 +12,7 @@ export const AllMessageBox = styled.div`
   justify-content: flex-end;
   display: flex;
   flex-direction: column;
+  position: relative;
 `;
 
 export const MessageBoxWrapper = styled.div`
@@ -20,16 +21,16 @@ export const MessageBoxWrapper = styled.div`
   width: 100%;
 `;
 
+export const Mess = styled(BaseFlex)`
+  align-self: ${props => (props.ownMessage ? 'flex-end' : 'flex-start')};
+`;
 export const Message = styled.div`
-  max-width: 80%;
-  width: fit-content;
   min-height: 45px;
   margin-bottom: 1em;
   padding: 1em 1.2em;
   color: var(--dark);
   border-radius: var(--border-radius-large);
   background-color: ${props => (props.ownMessage ? '#D0D3E3' : 'var(--bg-color)')}; // temp color
-  margin-left: ${props => props.ownMessage && 'auto'};
 `;
 
 export const Tooltip = styled(ForkTooltip)`
