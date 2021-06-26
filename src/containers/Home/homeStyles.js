@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const LeftSidebar = styled.div`
-  width: 300px;
+  width: 290px;
   height: 100vh;
   border-left: 1px solid var(--color-200);
   border-top-left-radius: var(--border-radius-large);

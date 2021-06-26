@@ -20,6 +20,7 @@ export const User = styled(BaseFlex)`
 export const Control = styled(BaseFlex)`
   height: 50px;
   min-width: 50px;
+  white-space: nowrap;
   margin: 0.3em 0;
   padding: 0 0.8em;
   border-radius: var(--border-radius-medium);

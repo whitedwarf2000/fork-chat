@@ -5,11 +5,12 @@ import { Loader, Avatar } from '@fork-ui/core';
 import Dots from '@fork-ui/icons/Dots';
 import ArrowBackUp from '@fork-ui/icons/ArrowBackUp';
 import MoodSmile from '@fork-ui/icons/MoodSmile';
+import MessageDots from '@fork-ui/icons/MessageDots';
 
 import api from 'api';
 import useChat from 'hooks/useChat';
 
-import { BaseFlex } from 'components/BaseStyles';
+import { BaseFlex, ReplyMessageWrapper } from 'components/BaseStyles';
 
 import {
   AllMessageBoxWrapper,
@@ -19,9 +20,10 @@ import {
   MessageControlWrapper,
   MessageControlItem,
   Mess,
+  ReplyMessage,
 } from './directStyles';
 
-const AllMessage = ({ currentChat, user }) => {
+const AllMessage = ({ currentChat, user, getQuoteMessage }) => {
   const { _id: userId } = user;
   const { messages, typing } = useChat(currentChat._id);
 
@@ -63,7 +65,7 @@ const AllMessage = ({ currentChat, user }) => {
               <MessageControlItem>
                 <Dots />
               </MessageControlItem>
-              <MessageControlItem>
+              <MessageControlItem onClick={() => getQuoteMessage(m)}>
                 <ArrowBackUp />
               </MessageControlItem>
               <MessageControlItem>
@@ -83,7 +85,17 @@ const AllMessage = ({ currentChat, user }) => {
                 <div style={{ width: '40px' }} />
               </div>
             )}
-            <Message ownMessage={own}>{m.text}</Message>
+            <Message ownMessage={own}>
+              {m?.reply && m.reply.text && (
+                <ReplyMessageWrapper>
+                  <div>
+                    <MessageDots size="15px" />
+                  </div>
+                  <ReplyMessage>{m.reply.text}</ReplyMessage>
+                </ReplyMessageWrapper>
+              )}
+              <div>{m.text}</div>
+            </Message>
           </Mess>
         </Tooltip>
       );
@@ -135,6 +147,7 @@ const AllMessage = ({ currentChat, user }) => {
 AllMessage.propTypes = {
   currentChat: PropTypes.object,
   user: PropTypes.object,
+  getQuoteMessage: PropTypes.func,
 };
 
 export default AllMessage;

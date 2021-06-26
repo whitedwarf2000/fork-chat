@@ -1,15 +1,14 @@
 import styled from 'styled-components';
 import { Tooltip as ForkTooltip } from '@fork-ui/core';
 
-import { BaseFlex } from 'components/BaseStyles';
+import { BaseFlex, ReplyMessageWrapper } from 'components/BaseStyles';
 
 export const DirectWrapper = styled.div`
   width: 100%;
 `;
 
 export const AllMessageBoxWrapper = styled.div`
-  min-height: 75vh; // Default height for no message layout
-  max-height: 75vh;
+  min-height: calc(75vh - 3.75em); // subtract height of TextArea
   padding: 1em 1.2em;
   overflow: hidden auto;
 `;
@@ -36,6 +35,15 @@ export const Message = styled.div`
   color: var(--dark);
   border-radius: var(--border-radius-large);
   background-color: ${props => (props.ownMessage ? '#D0D3E3' : 'var(--bg-color)')}; // temp color
+`;
+
+export const ReplyMessage = styled.div`
+  margin: 0.6em 0;
+  font-style: italic;
+`;
+export const QuoteWrapper = styled(ReplyMessageWrapper)`
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const Tooltip = styled(ForkTooltip)`

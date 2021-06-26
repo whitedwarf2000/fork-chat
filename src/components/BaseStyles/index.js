@@ -23,3 +23,9 @@ export const Divider = styled.div`
   height: 1px;
   background-color: #dee1e6;
 `;
+
+export const ReplyMessageWrapper = styled.div`
+  margin: 1em 0;
+  padding: 0 1em;
+  border-left: 2px solid #1f8070; // temp color
+`;
