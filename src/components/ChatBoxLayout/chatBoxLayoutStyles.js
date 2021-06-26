@@ -9,7 +9,6 @@ export const ChatBoxLayoutWrapper = styled.div`
 export const ChatBoxHeader = styled(BaseFlex)`
   height: 65px;
   background-color: #edeff4; // temp color
-  backdrop-filter: saturate(180%) blur(5px);
   padding: 1em;
   justify-content: space-between;
   border-top-left-radius: var(--border-radius-large);
