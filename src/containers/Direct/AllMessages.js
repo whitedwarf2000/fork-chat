@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { Loader, Avatar } from '@fork-ui/core';
@@ -27,6 +27,9 @@ const AllMessage = ({ currentChat, user }) => {
 
   const [isFetchingMess, setIsFetchingMess] = useState(false);
   const [mess, setMess] = useState([]);
+
+  const messBoxRef = useRef(null);
+  const messagesEndRef = useRef(null);
 
   const fetchMessageOfConversation = async conversationId => {
     setIsFetchingMess(true);
@@ -75,18 +78,28 @@ const AllMessage = ({ currentChat, user }) => {
                 <Avatar size={40}>B</Avatar>
               </div>
             )}
-            {!own &&
-              !isShowAvatar && ( // Dummy avatar spacing
-                <div style={{ marginRight: '10px' }}>
-                  <div style={{ width: '40px' }} />
-                </div>
-              )}
+            {/* render dummy avatar spacing if next message still belong to current member */}
+            {!own && !isShowAvatar && (
+              <div style={{ marginRight: '10px' }}>
+                <div style={{ width: '40px' }} />
+              </div>
+            )}
             <Message ownMessage={own}>{m.text}</Message>
           </Mess>
         </Tooltip>
       );
     });
   };
+
+  useEffect(() => {
+    const latestMess = messagesEndRef?.current.getBoundingClientRect();
+    if (latestMess?.top) {
+      messBoxRef.current.scrollTo({
+        top: latestMess.top,
+        behavior: 'smooth',
+      });
+    }
+  });
 
   useEffect(() => {
     if (currentChat?._id) {
@@ -99,7 +112,7 @@ const AllMessage = ({ currentChat, user }) => {
   }, [messages]);
 
   return (
-    <AllMessageBoxWrapper>
+    <AllMessageBoxWrapper ref={messBoxRef}>
       <AllMessageBox>
         {isFetchingMess ? (
           <div style={{ position: 'absolute', top: '50%', left: '50%' }}>
@@ -108,6 +121,7 @@ const AllMessage = ({ currentChat, user }) => {
         ) : (
           mess.length > 0 && renderAllMessages(mess)
         )}
+        <div ref={messagesEndRef} />
         {typing && typing?._id !== userId && (
           <BaseFlex>
             <Loader.Dots size="0.5em" />
