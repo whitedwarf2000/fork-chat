@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 import { BaseFlex } from '../BaseStyles';
 
 const areaSize = {
-  large: '3.125em', // 50px base 16px
-  medium: '2.5em', // 40px base 16px
-  small: '1.875em', // 30px base 16px
+  large: '3.750em', // 60px base 16px
+  medium: '3.125em', // 50px base 16px
+  small: '2.5em', // 40px base 16px
 };
 
 const Area = styled.textarea`
@@ -17,9 +17,11 @@ const Area = styled.textarea`
   padding: 8px 9px;
   resize: none;
   width: 100%;
-  height: ${props => areaSize[props.size] || areaSize.medium};
+  height: ${props => (props.hasQuote ? areaSize.large : areaSize[props.size] || areaSize.medium)};
 `;
-const AreaWrapper = styled(BaseFlex)`
+const AreaWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
   background-color: var(--bg-color);
   border-radius: var(--border-radius-large);
   padding: 0.625em 1em;
@@ -29,11 +31,14 @@ const ControlWrapper = styled(BaseFlex)`
   margin: 0 1em;
 `;
 
-const TextArea = React.forwardRef(({ size, controls, ...rest }, ref) => {
+const TextArea = React.forwardRef(({ size, controls, quote, ...rest }, ref) => {
   return (
     <AreaWrapper>
-      <Area ref={ref} size={size} {...rest} />
-      <ControlWrapper>{controls}</ControlWrapper>
+      {quote}
+      <BaseFlex>
+        <Area ref={ref} size={size} hasQuote={quote} {...rest} />
+        <ControlWrapper>{controls}</ControlWrapper>
+      </BaseFlex>
     </AreaWrapper>
   );
 });
@@ -41,6 +46,7 @@ const TextArea = React.forwardRef(({ size, controls, ...rest }, ref) => {
 TextArea.displayName = 'TextArea';
 TextArea.propTypes = {
   controls: PropTypes.any,
+  quote: PropTypes.any,
   size: PropTypes.oneOf(['large', 'medium', 'small']),
 };
 

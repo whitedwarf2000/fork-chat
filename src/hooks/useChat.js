@@ -36,12 +36,13 @@ const useChat = conversationId => {
     };
   }, [conversationId]);
 
-  const sendMessage = (newMessage, userId, receiverId) => {
+  const sendMessage = (newMessage, reply, userId, receiverId) => {
     socketRef.current.emit(NEW_CHAT_MESSAGE_EVENT, {
       text: newMessage,
       senderId: userId,
       receiverId,
       conversationId,
+      reply,
     });
   };
 

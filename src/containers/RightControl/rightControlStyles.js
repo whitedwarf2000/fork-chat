@@ -6,6 +6,7 @@ import { BaseFlex, H3 } from 'components/BaseStyles';
 export const RightControlWrapper = styled(LeftControlWrapper)`
   justify-content: flex-start;
   max-height: 100vh;
+  flex-shrink: 0;
 `;
 
 export const SelectedControl = styled(BaseFlex)`
