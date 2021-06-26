@@ -29,7 +29,6 @@ const AllMessage = ({ currentChat, user }) => {
   const [mess, setMess] = useState([]);
 
   const messBoxRef = useRef(null);
-  const messagesEndRef = useRef(null);
 
   const fetchMessageOfConversation = async conversationId => {
     setIsFetchingMess(true);
@@ -92,13 +91,14 @@ const AllMessage = ({ currentChat, user }) => {
   };
 
   useEffect(() => {
-    const latestMess = messagesEndRef?.current.getBoundingClientRect();
-    if (latestMess?.top) {
-      messBoxRef.current.scrollTo({
-        top: latestMess.top,
-        behavior: 'smooth',
-      });
+    if (!messBoxRef.current) {
+      return;
     }
+    const messBoxHeight = messBoxRef.current.offsetHeight;
+    messBoxRef.current.scrollTo({
+      top: messBoxHeight,
+      behavior: 'smooth',
+    });
   });
 
   useEffect(() => {
@@ -121,7 +121,6 @@ const AllMessage = ({ currentChat, user }) => {
         ) : (
           mess.length > 0 && renderAllMessages(mess)
         )}
-        <div ref={messagesEndRef} />
         {typing && typing?._id !== userId && (
           <BaseFlex>
             <Loader.Dots size="0.5em" />
