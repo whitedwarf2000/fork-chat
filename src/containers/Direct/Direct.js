@@ -7,9 +7,11 @@ import MessageBox from './MessageBox';
 import AllMessage from './AllMessages';
 
 import { DirectWrapper } from './directStyles';
+import useChat from 'hooks/useChat';
 
 const Direct = ({ currentChat, user }) => {
   const [quoteMess, setQuoteMess] = useState('');
+  const { messages, sendMessage, handleTyping } = useChat(currentChat._id);
 
   const getQuoteMessage = quoteMessage => {
     if (quoteMessage.text.length > 0) {
@@ -28,12 +30,19 @@ const Direct = ({ currentChat, user }) => {
   return (
     <DirectWrapper>
       <ChatBoxLayout title="Group Chat">
-        <AllMessage user={user} currentChat={currentChat} getQuoteMessage={getQuoteMessage} />
+        <AllMessage
+          user={user}
+          currentChat={currentChat}
+          getQuoteMessage={getQuoteMessage}
+          messages={messages}
+        />
         <MessageBox
           user={user}
           currentChat={currentChat}
           quoteMess={quoteMess}
           clearQuote={clearQuote}
+          sendMessage={sendMessage}
+          handleTyping={handleTyping}
         />
       </ChatBoxLayout>
     </DirectWrapper>

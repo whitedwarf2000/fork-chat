@@ -8,9 +8,8 @@ import MoodSmile from '@fork-ui/icons/MoodSmile';
 import MessageDots from '@fork-ui/icons/MessageDots';
 
 import api from 'api';
-import useChat from 'hooks/useChat';
 
-import { BaseFlex, ReplyMessageWrapper } from 'components/BaseStyles';
+import { ReplyMessageWrapper } from 'components/BaseStyles';
 
 import {
   AllMessageBoxWrapper,
@@ -23,9 +22,8 @@ import {
   ReplyMessage,
 } from './directStyles';
 
-const AllMessage = ({ currentChat, user, getQuoteMessage }) => {
+const AllMessage = ({ currentChat, user, getQuoteMessage, messages }) => {
   const { _id: userId } = user;
-  const { messages, typing } = useChat(currentChat._id);
 
   const [isFetchingMess, setIsFetchingMess] = useState(false);
   const [mess, setMess] = useState([]);
@@ -138,12 +136,6 @@ const AllMessage = ({ currentChat, user, getQuoteMessage }) => {
         ) : (
           mess.length > 0 && renderAllMessages(mess)
         )}
-        {typing && typing?._id !== userId && (
-          <BaseFlex>
-            <Loader.Dots size="0.5em" />
-            <div style={{ marginLeft: '5px' }}>{typing?.username} is typing</div>
-          </BaseFlex>
-        )}
       </AllMessageBox>
     </AllMessageBoxWrapper>
   );
@@ -153,6 +145,7 @@ AllMessage.propTypes = {
   currentChat: PropTypes.object,
   user: PropTypes.object,
   getQuoteMessage: PropTypes.func,
+  messages: PropTypes.array,
 };
 
 export default AllMessage;
