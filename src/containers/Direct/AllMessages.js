@@ -31,6 +31,7 @@ const AllMessage = ({ currentChat, user, getQuoteMessage }) => {
   const [mess, setMess] = useState([]);
 
   const messBoxRef = useRef(null);
+  const allMessageRef = useRef(null);
 
   const fetchMessageOfConversation = async conversationId => {
     setIsFetchingMess(true);
@@ -103,15 +104,19 @@ const AllMessage = ({ currentChat, user, getQuoteMessage }) => {
   };
 
   useEffect(() => {
-    if (!messBoxRef.current) {
-      return;
-    }
-    const messBoxHeight = messBoxRef.current.offsetHeight;
-    messBoxRef.current.scrollTo({
-      top: messBoxHeight,
-      behavior: 'smooth',
-    });
-  });
+    setTimeout(() => {
+      if (!messBoxRef.current || !allMessageRef.current) {
+        return;
+      }
+      const allMessageBoxHeight = allMessageRef.current?.offsetHeight;
+      if (allMessageBoxHeight) {
+        messBoxRef.current.scrollTo({
+          top: allMessageBoxHeight,
+          behavior: 'smooth',
+        });
+      }
+    }, 300);
+  }, [currentChat, messages, messBoxRef.current, allMessageRef.current]);
 
   useEffect(() => {
     if (currentChat?._id) {
@@ -125,7 +130,7 @@ const AllMessage = ({ currentChat, user, getQuoteMessage }) => {
 
   return (
     <AllMessageBoxWrapper ref={messBoxRef}>
-      <AllMessageBox>
+      <AllMessageBox ref={allMessageRef}>
         {isFetchingMess ? (
           <div style={{ position: 'absolute', top: '50%', left: '50%' }}>
             <Loader.NiceSpinner />
