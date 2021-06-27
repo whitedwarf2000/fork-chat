@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Button } from '@fork-ui/core';
 import Send from '@fork-ui/icons/Send';
 import MoodSmile from '@fork-ui/icons/MoodSmile';
-import PaperClip from '@fork-ui/icons/PaperClip';
+import Paperclip from '@fork-ui/icons/Paperclip';
 import X from '@fork-ui/icons/X';
 
 import api from 'api';
@@ -106,7 +106,7 @@ const MessageBox = ({ currentChat, user, quoteMess, clearQuote }) => {
                 minWidth: '40px',
                 margin: '0 1em',
               }}
-              icon={<PaperClip size="20px" />}
+              icon={<Paperclip size="20px" />}
             />
             <Button
               onClick={handleSendMessage}
