@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { Button } from '@fork-ui/core';
@@ -8,23 +8,31 @@ import Paperclip from '@fork-ui/icons/Paperclip';
 import X from '@fork-ui/icons/X';
 
 import api from 'api';
-import useChat from 'hooks/useChat';
 
 import TextArea from 'components/TextArea';
 
 import { MessageBoxWrapper, QuoteWrapper } from './directStyles';
 
-const MessageBox = ({ currentChat, user, quoteMess, clearQuote }) => {
+const MessageBox = ({ currentChat, user, quoteMess, clearQuote, sendMessage, handleTyping }) => {
   const { _id: userId } = user;
   const chatBoxRef = useRef(null);
-  const { sendMessage, handleTyping } = useChat(currentChat._id);
   const [currentMess, setCurrentMess] = useState('');
 
   const handleChangeMessage = event => {
     setCurrentMess(event.target.value);
   };
 
-  const handleSendMessage = async () => {
+  const putMessageToAPI = async payload => {
+    try {
+      await api.post('messages', {
+        ...payload,
+      });
+    } catch (error) {
+      return error;
+    }
+  };
+
+  const handleSendMessage = () => {
     if (currentMess.length === 0) {
       return;
     }
@@ -45,34 +53,21 @@ const MessageBox = ({ currentChat, user, quoteMess, clearQuote }) => {
     handleTyping('', user);
     clearQuote();
 
-    try {
-      await api.post('messages', {
-        ...payload,
-      });
-    } catch (error) {
-      return error;
-    }
+    putMessageToAPI(payload);
   };
 
-  useEffect(() => {
-    if (!chatBoxRef.current) {
-      return;
+  const onEnterPress = e => {
+    if (e.keyCode == 13 && e.shiftKey == false) {
+      e.preventDefault();
+      handleSendMessage();
     }
-    chatBoxRef.current.addEventListener('keyup', () => {
-      handleTyping(currentMess, user);
-    });
-
-    return () => {
-      chatBoxRef.current.removeEventListener('keyup', () => {
-        handleTyping(currentMess, user);
-      });
-    };
-  }, [chatBoxRef, currentMess, user]);
+  };
 
   return (
     <MessageBoxWrapper>
       <TextArea
         size="medium"
+        onKeyDown={onEnterPress}
         ref={chatBoxRef}
         value={currentMess}
         onChange={handleChangeMessage}
@@ -130,6 +125,8 @@ MessageBox.propTypes = {
   user: PropTypes.object,
   quoteMess: PropTypes.string,
   clearQuote: PropTypes.func,
+  sendMessage: PropTypes.func,
+  handleTyping: PropTypes.func,
 };
 
 export default MessageBox;
